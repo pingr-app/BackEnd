@@ -52,7 +52,7 @@ get '/users/friends' do
     friend[:last_name] = Faker::Name.last_name
     if friend_status != "pending" && friend_status != "requested"
       if loc == "true"
-        friend[:map_id] = rand(25)
+        friend[:map] = rand(25)
         friend[:x_coord] = rand(101)
         friend[:y_coord] = rand(301)
         friend[:time] = Faker::Time.between(DateTime.now - 1, DateTime.now)
