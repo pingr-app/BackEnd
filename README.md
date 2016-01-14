@@ -11,26 +11,29 @@ Methods:
   GET '/'
   
   Path example:
-      GET 'http://<hostname>:<port>/'
-
+  
+  ```
+  GET 'http://<hostname>:<port>/'
+  ```
+  
   Response body example:
     ```json  
     {
       "response":"Welcome to the Pingr API!"
     }
     ```
+  
   Status code: 200 OK
 
 - Get User
-    - Get info for user <id>
+    - Get info for specific user
     
-    GET '/users?id=<id>'
-  
     Path example:
-    
-        GET 'http://<hostname>:<port>users?id=CoolGuy17
-        --> Give me the info for the user "CoolGuy17"
-
+      ```  
+      GET 'http://<hostname>:<port>users?id=CoolGuy17
+      --> Give me the info for the user "CoolGuy17"
+      ```
+      
     Response body example:
       ```json
         {
@@ -40,19 +43,19 @@ Methods:
         "bio": "A user"
       }
       ```
-
+      
     Status code: (200 OK) if passed valid user ID  or (404 Not Found)
 
-POST '/users'
+- Create User
   - Creates new user, given info in JSON:
   - Returns the user's UUID.
 
   Path example:
-    
+    ```
     POST 'http://<hostname>:<port>/users'
-    
     --> I want to create a new user
-  
+    ```
+      
   Request body example:
     ```json
     {
@@ -75,7 +78,7 @@ POST '/users'
   Status code: (201 Created)
   NOTE: Once Facebook AUTH is implemented, duplicate users will not be allowed
 
-GET '/users/friends?id=<id>'
+- Get Friends
   - Returns friends list for user <id>
   - Accepts several optional parameters
     - map: specifies particular map
@@ -83,9 +86,11 @@ GET '/users/friends?id=<id>'
     - loc : set to 'true' to get location info for friend (map, coordinates, timestamp)
 
   Path example:
+    ```
     GET 'http://<hostname>:<port>/users/friends?id=HackerMan1337&map=fortune&loc=true'
     --> User "HackerMan1337" wants to see the locations of his friends at Fortune
-
+    ```
+    
   Response body example:
     ```json
     {
@@ -115,13 +120,15 @@ GET '/users/friends?id=<id>'
 
   Status code: (200 OK) if valid user ID, (404 Not Found) otherwise
 
-POST '/users/friends?id=<id>'
+- Add Friend
   - Adds a person to user <id>'s friends list
 
   Path example:
+    ```
     POST 'http://<hostname>:<port>/users/friends?id=8123
     --> User "8123" wants to add a new friend
-  
+    ```
+    
   Request body example:
     ```json
     {
