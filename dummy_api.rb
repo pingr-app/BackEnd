@@ -35,7 +35,7 @@ end
 
 get '/users/friends' do
   id = params['id']
-  status = params['friend_status'] # status: confirmed, requested, pending
+  friend_status = params['friend_status'] # status: confirmed, requested, pending
   map_id = params['map_id'] # map_id: id for the map to filter friends by map (counts as loc=true)
   loc = params['loc']       # loc   : true or false for location info
 
@@ -50,7 +50,7 @@ get '/users/friends' do
     friend[:id] = SecureRandom.uuid
     friend[:first_name] = Faker::Name.first_name
     friend[:last_name] = Faker::Name.last_name
-    if !friend_status.nil? && friend_status != "pending" && friend_status != "requested"
+    if friend_status != "pending" && friend_status != "requested"
       if loc == "true"
         friend[:map_id] = rand(25)
         friend[:x_coord] = rand(101)
