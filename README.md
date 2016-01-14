@@ -1,67 +1,84 @@
 # BackEnd: PROTOTYPE EDITION
-# Nima Boscarino : January 13, 2016
+##### Nima Boscarino : January 13, 2016
 
 This is the documentation for the Pingr Backend API.
 
 Methods:
 
-GET '/'
+- Main Route
   - See a welcome message
   
+  GET '/'
+  
   Path example:
-    GET 'http://<hostname>:<port>/'
-
+  
+  ```
+  GET 'http://<hostname>:<port>/'
+  ```
+  
   Response body example:
+    ```json  
     {
       "response":"Welcome to the Pingr API!"
     }
-
+    ```
+  
   Status code: 200 OK
 
-GET '/users?id=<id>'
-  - Get info for user <id>
-  
-  Path example:
-    GET 'http://<hostname>:<port>/users?id=CoolGuy17
-    --> Give me the info for the user "CoolGuy17"
+- Get User
+    - Get info for specific user
+    
+    Path example:
+      ```  
+      GET 'http://<hostname>:<port>users?id=CoolGuy17
+      --> Give me the info for the user "CoolGuy17"
+      ```
+      
+    Response body example:
+      ```json
+        {
+        "id": "CoolGuy17",
+        "first_name": "Jerome",
+        "last_name": "Zemlak",
+        "bio": "A user"
+      }
+      ```
+      
+    Status code: (200 OK) if passed valid user ID  or (404 Not Found)
 
-  Response body example:
-    {
-      "id": "CoolGuy17",
-      "first_name": "Jerome",
-      "last_name": "Zemlak",
-      "bio": "A user"
-    }
-
-  Status code: (200 OK) if passed valid user ID  or (404 Not Found)
-
-POST '/users'
+- Create User
   - Creates new user, given info in JSON:
   - Returns the user's UUID.
 
   Path example:
+    ```
     POST 'http://<hostname>:<port>/users'
     --> I want to create a new user
-  
+    ```
+      
   Request body example:
+    ```json
     {
       "first_name":"John",
       "last_name":"Doe",
       "Bio":"This is an example user"
     }
-
+    ```
+    
   Response body example:
+    ```json
     {
       "id": "75c69b65-ed63-45b0-ba73-f1bbd2c9433c",
       "first_name": "John",
       "last_name": "Doe",
       "bio": "This is an example user"
     }
+    ```
   
   Status code: (201 Created)
   NOTE: Once Facebook AUTH is implemented, duplicate users will not be allowed
 
-GET '/users/friends?id=<id>'
+- Get Friends
   - Returns friends list for user <id>
   - Accepts several optional parameters
     - map: specifies particular map
@@ -69,10 +86,13 @@ GET '/users/friends?id=<id>'
     - loc : set to 'true' to get location info for friend (map, coordinates, timestamp)
 
   Path example:
+    ```
     GET 'http://<hostname>:<port>/users/friends?id=HackerMan1337&map=fortune&loc=true'
     --> User "HackerMan1337" wants to see the locations of his friends at Fortune
-
+    ```
+    
   Response body example:
+    ```json
     {
       "id": "HackerMan1337",
       "friends": [
@@ -96,22 +116,28 @@ GET '/users/friends?id=<id>'
         }
       ] 
     }
+    ```
 
   Status code: (200 OK) if valid user ID, (404 Not Found) otherwise
 
-POST '/users/friends?id=<id>'
+- Add Friend
   - Adds a person to user <id>'s friends list
 
   Path example:
+    ```
     POST 'http://<hostname>:<port>/users/friends?id=8123
     --> User "8123" wants to add a new friend
-  
+    ```
+    
   Request body example:
+    ```json
     {
       "friend_id":"b9ca56f0-2eff-4191-829a-1bb27f324565"
     }
+    ```
 
   Response body example:
+  ```json
   {
     "id": "8123",
     "friend_id": "b9ca56f0-2eff-4191-829a-1bb27f324565",
@@ -119,6 +145,7 @@ POST '/users/friends?id=<id>'
     "last_name": "Haley",
     "friend_status": "confirmed"
   }
+  ```
 
   Status code: (200 OK) if valid friend ID and user ID.
   NOTE: I'll figure out how to deal with invalid friend IDs later.
