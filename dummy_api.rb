@@ -50,7 +50,7 @@ get '/users/friends' do
     friend[:id] = SecureRandom.uuid
     friend[:first_name] = Faker::Name.first_name
     friend[:last_name] = Faker::Name.last_name
-    if friend_status != "pending" && friend_status != "requested"
+    if !friend_status.nil? && friend_status != "pending" && friend_status != "requested"
       if loc == "true"
         friend[:map_id] = rand(25)
         friend[:x_coord] = rand(101)
