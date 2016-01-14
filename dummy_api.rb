@@ -35,8 +35,8 @@ end
 
 get '/users/friends' do
   id = params['id']
-  friend_status = params['friend_status'] # status: confirmed, requested, pending
-  map_id = params['map_id'] # map_id: id for the map to filter friends by map (counts as loc=true)
+  friend_status = params['status'] # status: confirmed, requested, pending
+  map = params['map'] # map: id for the map to filter friends by map (counts as loc=true)
   loc = params['loc']       # loc   : true or false for location info
 
 
@@ -57,8 +57,8 @@ get '/users/friends' do
         friend[:y_coord] = rand(301)
         friend[:time] = Faker::Time.between(DateTime.now - 1, DateTime.now)
       end
-      if !map_id.nil?
-        friend[:map_id] = map_id
+      if !map.nil?
+        friend[:map] = map
       end
     end
   end
@@ -88,7 +88,7 @@ post '/users/friends' do
     friend_status = "requested"
   end
 
-  return_message[:friend_status] = friend_status
+  return_message[:status] = friend_status
   status 201
 
   JSON.pretty_generate(return_message)
