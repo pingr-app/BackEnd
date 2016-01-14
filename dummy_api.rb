@@ -42,7 +42,7 @@ get '/users/friends' do
 
   friends = []
   
-  rand(10).times do
+  rand(11).times do
     friends << {} 
   end
 

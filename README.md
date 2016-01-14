@@ -1,4 +1,5 @@
 # BackEnd: PROTOTYPE EDITION
+# Nima Boscarino : January 13, 2016
 
 This is the documentation for the Pingr Backend API.
 
@@ -121,5 +122,3 @@ POST '/users/friends?id=<id>'
 
   Status code: (200 OK) if valid friend ID and user ID.
   NOTE: I'll figure out how to deal with invalid friend IDs later.
-
-
